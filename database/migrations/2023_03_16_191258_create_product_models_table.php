@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        // Digunakan Untuk buat table
+        Schema::create('product_models', function (Blueprint $table) {
+            $table->id("ID_produk");
+            $table->string("nama_produk");
+            $table->integer("harga_produk");
+            $table->unsignedBigInteger("ID_kategori");
+            $table->foreign('ID_kategori')->references('ID_kategori')->on('categories_models')->onDelete('cascade')->onUpdate('cascade');
+        });
+
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('product_models');
+    }
+};
